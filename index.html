@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CasinoVergelijker.nl — Vind het Beste Online Casino</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --accent-hover: #d63851;
+      --gold: #f5c518;
+      --surface: #16213e;
+      --surface-light: #1c2a4a;
+      --text: #eee;
+      --text-muted: #a0a8c0;
+      --radius: 12px;
+      --chat-width: 380px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-weight: 500;
+      font-size: .95rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      background: linear-gradient(170deg, var(--surface) 0%, var(--primary) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(233,69,96,.15), transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: .6rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: .85rem 2.4rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background .2s, transform .15s;
+    }
+    .hero-cta:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* ── SECTION HELPERS ── */
+    section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+    section .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ── CASINO CARDS ── */
+    .casino-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .casino-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      transition: transform .2s, box-shadow .2s;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .casino-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+    .casino-card .badge {
+      align-self: flex-start;
+      background: var(--gold);
+      color: #111;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .6rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+    }
+    .casino-card h3 { font-size: 1.2rem; }
+    .casino-card .stars { color: var(--gold); font-size: .95rem; }
+    .casino-card .bonus {
+      font-size: .92rem;
+      color: var(--text-muted);
+    }
+    .casino-card .card-cta {
+      margin-top: auto;
+      display: inline-block;
+      text-align: center;
+      background: var(--accent);
+      color: #fff;
+      padding: .6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .9rem;
+      transition: background .2s;
+    }
+    .casino-card .card-cta:hover { background: var(--accent-hover); }
+
+    /* ── FEATURES ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .feature-item .icon { font-size: 2rem; margin-bottom: .5rem; }
+    .feature-item h3 { margin-bottom: .3rem; }
+    .feature-item p { font-size: .9rem; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      background: var(--surface);
+      color: var(--text-muted);
+      font-size: .85rem;
+      line-height: 1.8;
+    }
+    footer .age-warning {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      width: 32px; height: 32px;
+      line-height: 32px;
+      border-radius: 50%;
+      margin-bottom: .4rem;
+    }
+
+    /* ── CHATBOT ── */
+    .chat-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      width: 62px; height: 62px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(233,69,96,.45);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .chat-toggle:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(233,69,96,.55);
+    }
+    .chat-toggle svg { width: 28px; height: 28px; fill: #fff; }
+    .chat-toggle .close-icon { display: none; }
+    .chat-toggle.open .chat-icon { display: none; }
+    .chat-toggle.open .close-icon { display: block; }
+
+    .chat-panel {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      z-index: 998;
+      width: var(--chat-width);
+      max-height: 520px;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 12px 48px rgba(0,0,0,.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(.92) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .chat-panel.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .chat-header {
+      background: var(--accent);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .chat-header .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .chat-header .info h4 { font-size: .95rem; font-weight: 700; }
+    .chat-header .info p { font-size: .75rem; opacity: .8; }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      min-height: 280px;
+      max-height: 340px;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+
+    .msg {
+      max-width: 88%;
+      padding: .7rem 1rem;
+      border-radius: 14px;
+      font-size: .88rem;
+      line-height: 1.5;
+      animation: msgIn .3s ease;
+    }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg.bot {
+      align-self: flex-start;
+      background: var(--surface-light);
+      border-bottom-left-radius: 4px;
+    }
+    .msg.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg .rec-list { list-style: none; margin-top: .5rem; display: flex; flex-direction: column; gap: .5rem; }
+    .msg .rec-item {
+      background: rgba(255,255,255,.05);
+      border-radius: 10px;
+      padding: .55rem .8rem;
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+    }
+    .msg .rec-item .rec-top {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      flex-wrap: wrap;
+    }
+    .msg .rec-item .rec-name { font-weight: 700; }
+    .msg .rec-item .rec-badge {
+      background: var(--gold);
+      color: #111;
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .1rem .45rem;
+      border-radius: 50px;
+    }
+    .msg .rec-item .rec-stars { color: var(--gold); font-size: .8rem; }
+    .msg .rec-item .rec-bonus { font-size: .8rem; color: var(--text-muted); }
+    .msg .rec-item .rec-cta {
+      margin-top: .3rem;
+      align-self: flex-start;
+      background: var(--accent);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .3rem .8rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .msg .rec-item .rec-cta:hover { background: var(--accent-hover); }
+
+    .chat-input-area {
+      display: flex;
+      gap: .5rem;
+      padding: .8rem 1rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+      background: var(--primary);
+    }
+    .chat-input-area input {
+      flex: 1;
+      background: var(--surface-light);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: .6rem .9rem;
+      color: var(--text);
+      font-size: .88rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .chat-input-area input::placeholder { color: var(--text-muted); }
+    .chat-input-area input:focus { border-color: var(--accent); }
+    .chat-input-area button {
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      padding: .6rem .9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .chat-input-area button:hover { background: var(--accent-hover); }
+    .chat-input-area button svg { width: 20px; height: 20px; fill: #fff; }
+
+    .typing-dots { display: flex; gap: 4px; padding: 4px 0; }
+    .typing-dots span {
+      width: 7px; height: 7px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      animation: bounce .6s infinite alternate;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: .15s; }
+    .typing-dots span:nth-child(3) { animation-delay: .3s; }
+    @keyframes bounce {
+      to { transform: translateY(-5px); opacity: .5; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .nav-links { display: none; }
+      .chat-panel { width: calc(100vw - 32px); right: 16px; bottom: 90px; }
+      .chat-toggle { right: 16px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Casino<span>Vergelijker</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Casino Reviews</a></li>
+    <li><a href="#">Bonussen</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Over Ons</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Vind het <span>Beste Online Casino</span></h1>
+  <p>Onafhankelijke reviews, exclusieve bonussen en eerlijke vergelijkingen. Ontdek welk casino het beste bij jou past.</p>
+  <a href="#casinos" class="hero-cta">Bekijk Top Casino's →</a>
+</div>
+
+<!-- FEATURES -->
+<section>
+  <h2>Waarom CasinoVergelijker?</h2>
+  <p class="subtitle">Wij helpen je de juiste keuze te maken.</p>
+  <div class="features">
+    <div class="feature-item">
+      <div class="icon">🔍</div>
+      <h3>Onafhankelijk</h3>
+      <p>Eerlijke, onpartijdige reviews van alle online casino's.</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">🎁</div>
+      <h3>Exclusieve Bonussen</h3>
+      <p>Profiteer van unieke welkomstbonussen die je nergens anders vindt.</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">🛡️</div>
+      <h3>Veilig Spelen</h3>
+      <p>Alleen betrouwbare en gelicentieerde casino's in onze lijsten.</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">⚡</div>
+      <h3>Snelle Uitbetalingen</h3>
+      <p>Casino's met de snelste uitbetalingsmethoden geselecteerd.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOP CASINOS -->
+<section id="casinos">
+  <h2>Top Casino's van 2026</h2>
+  <p class="subtitle">Onze experts hebben de beste opties voor je geselecteerd.</p>
+  <div class="casino-grid">
+    <div class="casino-card">
+      <span class="badge">⭐ Aanbevolen</span>
+      <h3>🎰 RoyalBet Casino</h3>
+      <div class="stars">★★★★★</div>
+      <p class="bonus">💰 €500 welkomstbonus + 200 gratis spins</p>
+      <a href="#" class="card-cta">Bezoek Casino →</a>
+    </div>
+    <div class="casino-card">
+      <span class="badge">🔥 Populair</span>
+      <h3>🃏 LuckyDays</h3>
+      <div class="stars">★★★★★</div>
+      <p class="bonus">💰 100% bonus tot €300 + 50 free spins</p>
+      <a href="#" class="card-cta">Bezoek Casino →</a>
+    </div>
+    <div class="casino-card">
+      <h3>🎲 GoldSpin Casino</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="bonus">💰 €200 bonus + 100 gratis spins</p>
+      <a href="#" class="card-cta">Bezoek Casino →</a>
+    </div>
+    <div class="casino-card">
+      <h3>🏆 VegasPlus</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="bonus">💰 150% welkomstbonus tot €400</p>
+      <a href="#" class="card-cta">Bezoek Casino →</a>
+    </div>
+    <div class="casino-card">
+      <span class="badge">💎 Nieuw</span>
+      <h3>🎯 SpinRoyale</h3>
+      <div class="stars">★★★★★</div>
+      <p class="bonus">💰 €1.000 bonus + 250 free spins</p>
+      <a href="#" class="card-cta">Bezoek Casino →</a>
+    </div>
+    <div class="casino-card">
+      <h3>🌟 CasinoMax</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="bonus">💰 50 gratis spins zonder storting</p>
+      <a href="#" class="card-cta">Bezoek Casino →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="age-warning">18+</div>
+  <p>Gokken kan verslavend zijn. Speel bewust. | <a href="https://www.loketkansspel.nl" style="color:var(--accent);">Hulp nodig? Loketkansspel.nl</a></p>
+  <p>&copy; 2026 CasinoVergelijker.nl — Alle rechten voorbehouden.</p>
+</footer>
+
+<!-- CHATBOT -->
+<button class="chat-toggle" id="chatToggle" aria-label="Open chat">
+  <svg class="chat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><path d="M7 9h10v2H7zm0-3h10v2H7z"/></svg>
+  <svg class="close-icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="avatar">🤖</div>
+    <div class="info">
+      <h4>Casino Assistent</h4>
+      <p>Online — altijd beschikbaar</p>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">
+      Hallo! 👋 Ik ben je Casino Assistent. Stel me een vraag, bijvoorbeeld:<br><br>
+      • <em>Wat is het beste casino zonder Cruks?</em><br>
+      • <em>Welk casino heeft de beste bonus?</em><br>
+      • <em>Waar kan ik met iDEAL betalen?</em>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Stel je vraag..." autocomplete="off">
+    <button id="chatSend" aria-label="Verstuur">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const toggle = document.getElementById('chatToggle');
+const panel = document.getElementById('chatPanel');
+const messages = document.getElementById('chatMessages');
+const input = document.getElementById('chatInput');
+const sendBtn = document.getElementById('chatSend');
+
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('open');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) input.focus();
+});
+
+function addMsg(text, sender) {
+  const div = document.createElement('div');
+  div.className = `msg ${sender}`;
+  div.innerHTML = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg bot typing';
+  div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+const casinos = {
+  zonderCruks: [
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: '€500 welkomstbonus + 200 gratis spins', promoted: true },
+    { name: 'SpinRoyale', stars: '★★★★★', bonus: '€1.000 bonus + 250 free spins', promoted: true },
+    { name: 'GoldSpin Casino', stars: '★★★★☆', bonus: '€200 bonus + 100 gratis spins', promoted: false },
+    { name: 'NoCruks.bet', stars: '★★★★☆', bonus: '100% tot €600 + 150 spins', promoted: false },
+    { name: 'FreeSpin Palace', stars: '★★★★☆', bonus: '€250 bonus + 50 gratis spins', promoted: false },
+  ],
+  bonus: [
+    { name: 'SpinRoyale', stars: '★★★★★', bonus: '€1.000 bonus + 250 free spins', promoted: true },
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: '€500 welkomstbonus + 200 gratis spins', promoted: true },
+    { name: 'VegasPlus', stars: '★★★★☆', bonus: '150% welkomstbonus tot €400', promoted: false },
+    { name: 'LuckyDays', stars: '★★★★★', bonus: '100% bonus tot €300 + 50 free spins', promoted: false },
+  ],
+  ideal: [
+    { name: 'LuckyDays', stars: '★★★★★', bonus: '100% bonus tot €300 + 50 free spins', promoted: true },
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: '€500 welkomstbonus + 200 gratis spins', promoted: false },
+    { name: 'CasinoMax', stars: '★★★★☆', bonus: '50 gratis spins zonder storting', promoted: false },
+    { name: 'GoldSpin Casino', stars: '★★★★☆', bonus: '€200 bonus + 100 gratis spins', promoted: false },
+  ],
+  betrouwbaar: [
+    { name: 'LuckyDays', stars: '★★★★★', bonus: '100% bonus tot €300 + 50 free spins', promoted: true },
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: '€500 welkomstbonus + 200 gratis spins', promoted: true },
+    { name: 'VegasPlus', stars: '★★★★☆', bonus: '150% welkomstbonus tot €400', promoted: false },
+    { name: 'GoldSpin Casino', stars: '★★★★☆', bonus: '€200 bonus + 100 gratis spins', promoted: false },
+  ],
+  gratis: [
+    { name: 'CasinoMax', stars: '★★★★☆', bonus: '50 gratis spins zonder storting', promoted: true },
+    { name: 'SpinRoyale', stars: '★★★★★', bonus: '€1.000 bonus + 250 free spins', promoted: false },
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: '€500 + 200 gratis spins', promoted: false },
+    { name: 'GoldSpin Casino', stars: '★★★★☆', bonus: '€200 bonus + 100 gratis spins', promoted: false },
+  ],
+  snelUitbetalen: [
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: 'Uitbetaling binnen 1 uur', promoted: true },
+    { name: 'LuckyDays', stars: '★★★★★', bonus: 'Uitbetaling binnen 2 uur', promoted: false },
+    { name: 'SpinRoyale', stars: '★★★★★', bonus: 'Uitbetaling dezelfde dag', promoted: false },
+  ],
+  algemeen: [
+    { name: 'RoyalBet Casino', stars: '★★★★★', bonus: '€500 welkomstbonus + 200 gratis spins', promoted: true },
+    { name: 'LuckyDays', stars: '★★★★★', bonus: '100% bonus tot €300 + 50 free spins', promoted: true },
+    { name: 'SpinRoyale', stars: '★★★★★', bonus: '€1.000 bonus + 250 free spins', promoted: false },
+    { name: 'GoldSpin Casino', stars: '★★★★☆', bonus: '€200 bonus + 100 gratis spins', promoted: false },
+    { name: 'VegasPlus', stars: '★★★★☆', bonus: '150% welkomstbonus tot €400', promoted: false },
+  ],
+};
+
+function matchCasinos(q) {
+  const lower = q.toLowerCase();
+  if (lower.includes('cruks') || lower.includes('zonder'))
+    return { title: "Hier zijn de beste casino's zonder Cruks:", list: casinos.zonderCruks };
+  if (lower.includes('bonus') || lower.includes('welkom'))
+    return { title: "Dit zijn de casino's met de beste bonussen:", list: casinos.bonus };
+  if (lower.includes('ideal') || lower.includes('betaal') || lower.includes('storting'))
+    return { title: "Bij deze casino's kun je met iDEAL betalen:", list: casinos.ideal };
+  if (lower.includes('betrouwbaar') || lower.includes('veilig') || lower.includes('licen'))
+    return { title: 'Dit zijn de meest betrouwbare online casino\'s:', list: casinos.betrouwbaar };
+  if (lower.includes('gratis') || lower.includes('free spin') || lower.includes('geen storting'))
+    return { title: "Casino's met gratis spins en bonussen:", list: casinos.gratis };
+  if (lower.includes('snel') || lower.includes('uitbetal'))
+    return { title: "Casino's met de snelste uitbetalingen:", list: casinos.snelUitbetalen };
+  if (lower.includes('casino') || lower.includes('beste') || lower.includes('top') || lower.includes('goed'))
+    return { title: "Hier zijn onze top aanbevolen casino's:", list: casinos.algemeen };
+
+  return null;
+}
+
+function buildRecommendation(result) {
+  let html = `${result.title}<ul class="rec-list">`;
+  result.list.forEach(c => {
+    html += `<li class="rec-item">
+      <div class="rec-top">
+        <span class="rec-name">${c.name}</span>
+        ${c.promoted ? '<span class="rec-badge">Gepromoot</span>' : ''}
+      </div>
+      <span class="rec-stars">${c.stars}</span>
+      <span class="rec-bonus">${c.bonus}</span>
+      <button class="rec-cta">Bezoek Casino →</button>
+    </li>`;
+  });
+  html += '</ul>';
+  return html;
+}
+
+function handleSend() {
+  const q = input.value.trim();
+  if (!q) return;
+  addMsg(q, 'user');
+  input.value = '';
+
+  const typing = showTyping();
+
+  setTimeout(() => {
+    typing.remove();
+    const result = matchCasinos(q);
+    if (result) {
+      addMsg(buildRecommendation(result), 'bot');
+    } else {
+      addMsg(
+        'Ik begrijp je vraag niet helemaal. Probeer iets als:<br><br>' +
+        '• <em>Beste casino zonder Cruks</em><br>' +
+        '• <em>Casino met de beste bonus</em><br>' +
+        '• <em>Waar kan ik met iDEAL betalen?</em><br>' +
+        '• <em>Welk casino betaalt snel uit?</em>',
+        'bot'
+      );
+    }
+  }, 800 + Math.random() * 600);
+}
+
+sendBtn.addEventListener('click', handleSend);
+input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
+</script>
+
+</body>
+</html>
