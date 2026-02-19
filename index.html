@@ -8,14 +8,14 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #1a1a2e;
-      --accent: #e94560;
-      --accent-hover: #d63851;
-      --gold: #f5c518;
-      --surface: #16213e;
-      --surface-light: #1c2a4a;
-      --text: #eee;
-      --text-muted: #a0a8c0;
+      --primary: #f5f0eb;
+      --accent: #e87820;
+      --accent-hover: #d06a18;
+      --gold: #f5a623;
+      --surface: #ffffff;
+      --surface-light: #faf7f4;
+      --text: #2d2a26;
+      --text-muted: #7a7570;
       --radius: 12px;
       --chat-width: 380px;
     }
@@ -39,7 +39,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,.4);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
     }
     .logo {
       font-size: 1.4rem;
@@ -67,7 +67,7 @@
       content: '';
       position: absolute;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(233,69,96,.15), transparent 70%);
+      background: radial-gradient(circle, rgba(232,120,32,.12), transparent 70%);
       top: -100px; right: -100px;
       border-radius: 50%;
     }
@@ -121,11 +121,11 @@
       flex-direction: column;
       gap: .6rem;
       transition: transform .2s, box-shadow .2s;
-      border: 1px solid rgba(255,255,255,.06);
+      border: 1px solid rgba(0,0,0,.06);
     }
     .casino-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
     }
     .casino-card .badge {
       align-self: flex-start;
@@ -168,7 +168,7 @@
       border-radius: var(--radius);
       padding: 1.5rem;
       text-align: center;
-      border: 1px solid rgba(255,255,255,.06);
+      border: 1px solid rgba(0,0,0,.06);
     }
     .feature-item .icon { font-size: 2rem; margin-bottom: .5rem; }
     .feature-item h3 { margin-bottom: .3rem; }
@@ -208,12 +208,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(233,69,96,.45);
+      box-shadow: 0 4px 20px rgba(232,120,32,.4);
       transition: transform .2s, box-shadow .2s;
     }
     .chat-toggle:hover {
       transform: scale(1.08);
-      box-shadow: 0 6px 28px rgba(233,69,96,.55);
+      box-shadow: 0 6px 28px rgba(232,120,32,.5);
     }
     .chat-toggle svg { width: 28px; height: 28px; fill: #fff; }
     .chat-toggle .close-icon { display: none; }
@@ -229,7 +229,7 @@
       max-height: 520px;
       background: var(--surface);
       border-radius: 16px;
-      box-shadow: 0 12px 48px rgba(0,0,0,.5);
+      box-shadow: 0 12px 48px rgba(0,0,0,.15);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -272,7 +272,7 @@
       max-height: 340px;
     }
     .chat-messages::-webkit-scrollbar { width: 4px; }
-    .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,.1); border-radius: 4px; }
 
     .msg {
       max-width: 88%;
@@ -300,7 +300,7 @@
 
     .msg .rec-list { list-style: none; margin-top: .5rem; display: flex; flex-direction: column; gap: .5rem; }
     .msg .rec-item {
-      background: rgba(255,255,255,.05);
+      background: rgba(0,0,0,.04);
       border-radius: 10px;
       padding: .55rem .8rem;
       display: flex;
@@ -343,13 +343,13 @@
       display: flex;
       gap: .5rem;
       padding: .8rem 1rem;
-      border-top: 1px solid rgba(255,255,255,.06);
+      border-top: 1px solid rgba(0,0,0,.08);
       background: var(--primary);
     }
     .chat-input-area input {
       flex: 1;
       background: var(--surface-light);
-      border: 1px solid rgba(255,255,255,.1);
+      border: 1px solid rgba(0,0,0,.1);
       border-radius: 10px;
       padding: .6rem .9rem;
       color: var(--text);
@@ -514,9 +514,13 @@
   <div class="chat-messages" id="chatMessages">
     <div class="msg bot">
       Hallo! 👋 Ik ben je Casino Assistent. Stel me een vraag, bijvoorbeeld:<br><br>
+      <strong>Casino aanbevelingen:</strong><br>
       • <em>Wat is het beste casino zonder Cruks?</em><br>
-      • <em>Welk casino heeft de beste bonus?</em><br>
-      • <em>Waar kan ik met iDEAL betalen?</em>
+      • <em>Welk casino heeft de beste bonus?</em><br><br>
+      <strong>Casino kennisbank:</strong><br>
+      • <em>Wat betekent RTP?</em><br>
+      • <em>Wat is volatiliteit?</em><br>
+      • <em>Welke betaalmethoden zijn er?</em>
     </div>
   </div>
   <div class="chat-input-area">
@@ -604,9 +608,56 @@ const casinos = {
   ],
 };
 
+const faq = [
+  {
+    keywords: ['rtp', 'return to player', 'terugbetaling'],
+    answer: '<strong>RTP (Return to Player)</strong> is het theoretische percentage van alle inzetten dat een spel op de lange termijn terugbetaalt aan spelers. Een RTP van 96% betekent dat je gemiddeld €96 terugkrijgt per €100 inzet. Hoe hoger de RTP, hoe gunstiger het spel voor de speler.<br><br>💡 <em>Tip: kies slots met een RTP van 96% of hoger voor de beste kansen.</em>'
+  },
+  {
+    keywords: ['volatiliteit', 'variantie', 'variance'],
+    answer: '<strong>Volatiliteit</strong> geeft aan hoe vaak en hoeveel een slot uitbetaalt:<br><br>• <strong>Lage volatiliteit</strong> — Regelmatige, kleinere winsten<br>• <strong>Medium volatiliteit</strong> — Balans tussen frequentie en grootte<br>• <strong>Hoge volatiliteit</strong> — Minder vaak, maar grotere winsten<br><br>💡 <em>Tip: kies lage volatiliteit voor langer spelen, hoge volatiliteit voor grotere prijzen.</em>'
+  },
+  {
+    keywords: ['wagering', 'inzetvereist', 'inzet eis', 'omzet eis', 'omzeteis'],
+    answer: '<strong>Wagering requirements (inzetvereisten)</strong> geven aan hoe vaak je een bonus moet inzetten voordat je kunt uitbetalen. Bijvoorbeeld: een €100 bonus met 30x wagering betekent dat je €3.000 moet inzetten voordat je kunt opnemen.<br><br>💡 <em>Tip: hoe lager de wagering, hoe beter. Zoek naar bonussen met 20x-30x wagering.</em>'
+  },
+  {
+    keywords: ['cruks', 'wat is cruks', 'uitleg cruks'],
+    answer: '<strong>CRUKS</strong> staat voor Centraal Register Uitsluiting Kansspelen. Het is een Nederlands systeem waarbij spelers zichzelf (of door anderen) kunnen laten uitsluiten van alle vergunde online casino\'s in Nederland. Casino\'s zonder Cruks vallen buiten de Nederlandse vergunning.<br><br>💡 <em>Wil je casino\'s zonder Cruks bekijken? Vraag me: "Beste casino zonder Cruks"</em>'
+  },
+  {
+    keywords: ['ksa', 'kansspelautoriteit', 'vergunning', 'legaal'],
+    answer: '<strong>De Kansspelautoriteit (KSA)</strong> is de Nederlandse toezichthouder op kansspelen. Sinds 2021 kunnen online casino\'s een Nederlandse vergunning aanvragen. Een KSA-vergunning betekent dat het casino aan strenge regels voldoet op het gebied van veiligheid, eerlijkheid en verslavingspreventie.<br><br>💡 <em>Tip: speel bij voorkeur bij casino\'s met een KSA-vergunning voor maximale bescherming.</em>'
+  },
+  {
+    keywords: ['live casino', 'live dealer', 'live spelen'],
+    answer: '<strong>Live casino</strong> laat je spelen met echte dealers via een videostream. Populaire live games zijn:<br><br>• 🃏 <strong>Blackjack</strong> — Probeer 21 te halen<br>• 🎰 <strong>Roulette</strong> — Kies je nummer of kleur<br>• 🃏 <strong>Baccarat</strong> — Speler vs. bank<br>• 🎲 <strong>Game Shows</strong> — Crazy Time, Monopoly Live<br><br>💡 <em>Tip: live casino biedt de meest authentieke casino-ervaring vanuit huis.</em>'
+  },
+  {
+    keywords: ['slot', 'slots', 'gokkasten', 'gokkast', 'speelautomaat', 'speelautomaten'],
+    answer: '<strong>Online slots (gokkasten)</strong> zijn digitale speelautomaten. Ze werken met een Random Number Generator (RNG) voor eerlijke resultaten. Let op deze kenmerken bij het kiezen:<br><br>• 📊 <strong>RTP</strong> — Hoe hoger, hoe beter (96%+)<br>• 🎢 <strong>Volatiliteit</strong> — Laag, medium of hoog<br>• 🎁 <strong>Bonusfuncties</strong> — Free spins, multipliers, bonus games<br><br>💡 <em>Populaire slots: Book of Dead, Starburst, Gates of Olympus, Sweet Bonanza.</em>'
+  },
+  {
+    keywords: ['storten', 'opnemen', 'betaalmethode', 'betaalmethoden', 'betaaloptie'],
+    answer: 'De meest gebruikte <strong>betaalmethoden</strong> bij online casino\'s in Nederland:<br><br>• 🏦 <strong>iDEAL</strong> — Direct vanuit je bank (populairst in NL)<br>• 💳 <strong>Visa / Mastercard</strong> — Creditcard of debit<br>• 📱 <strong>Trustly</strong> — Bankbetaling zonder registratie<br>• ⚡ <strong>Skrill / Neteller</strong> — E-wallets, snel uitbetalen<br>• ₿ <strong>Crypto</strong> — Bitcoin, Ethereum (bij niet-KSA casino\'s)<br><br>💡 <em>Wil je casino\'s met iDEAL? Vraag me: "Casino met iDEAL"</em>'
+  },
+  {
+    keywords: ['verantwoord', 'verslaving', 'gokverslaving', 'hulp', 'limiet', 'limieten'],
+    answer: '<strong>Verantwoord spelen</strong> is essentieel. Hier zijn belangrijke tips:<br><br>• 💰 Stel een <strong>budget</strong> in en houd je eraan<br>• ⏰ Stel <strong>tijdslimieten</strong> in<br>• 🚫 Jaag nooit verliezen na<br>• 🆘 Zoek hulp als het niet meer leuk is<br><br>📞 <strong>Hulplijnen:</strong><br>• <em>Loketkansspel.nl</em> — 0800-1535<br>• <em>Anonieme Gokkers</em> — 0900-2177721<br>• <em>AGOG.nl</em> — Online hulp'
+  },
+];
+
+function matchFaq(q) {
+  const lower = q.toLowerCase();
+  for (const item of faq) {
+    if (item.keywords.some(kw => lower.includes(kw))) return item.answer;
+  }
+  return null;
+}
+
 function matchCasinos(q) {
   const lower = q.toLowerCase();
-  if (lower.includes('cruks') || lower.includes('zonder'))
+  if ((lower.includes('cruks') && !lower.includes('wat is')) || (lower.includes('zonder') && !lower.includes('wat')))
     return { title: "Hier zijn de beste casino's zonder Cruks:", list: casinos.zonderCruks };
   if (lower.includes('bonus') || lower.includes('welkom'))
     return { title: "Dit zijn de casino's met de beste bonussen:", list: casinos.bonus };
@@ -651,16 +702,25 @@ function handleSend() {
 
   setTimeout(() => {
     typing.remove();
+    const faqAnswer = matchFaq(q);
+    if (faqAnswer) {
+      addMsg(faqAnswer, 'bot');
+      return;
+    }
     const result = matchCasinos(q);
     if (result) {
       addMsg(buildRecommendation(result), 'bot');
     } else {
       addMsg(
         'Ik begrijp je vraag niet helemaal. Probeer iets als:<br><br>' +
+        '<strong>Casino vragen:</strong><br>' +
         '• <em>Beste casino zonder Cruks</em><br>' +
         '• <em>Casino met de beste bonus</em><br>' +
-        '• <em>Waar kan ik met iDEAL betalen?</em><br>' +
-        '• <em>Welk casino betaalt snel uit?</em>',
+        '• <em>Waar kan ik met iDEAL betalen?</em><br><br>' +
+        '<strong>Kennisbank:</strong><br>' +
+        '• <em>Wat betekent RTP?</em><br>' +
+        '• <em>Wat is volatiliteit?</em><br>' +
+        '• <em>Wat is CRUKS?</em>',
         'bot'
       );
     }
